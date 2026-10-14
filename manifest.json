@@ -1,0 +1,89 @@
+{
+  "manifest_version": "0.4",
+  "name": "jartic-japan-traffic-mcp",
+  "display_name": "JARTIC Japan Traffic Volume MCP",
+  "version": "1.0.0",
+  "description": "MCP server for JARTIC traffic volume API - real-time traffic data from 2,600+ observation points across Japan",
+  "long_description": "JARTIC Japan Traffic Volume MCP Server\n\nQueries JARTIC (日本道路交通情報センター) WFS traffic data API for real-time traffic volume data from national highways.\n\nTools:\n- get_traffic: Query traffic by bounding box\n- get_traffic_station: Query specific station by code\n- get_layer_info: Get layer metadata\n\nSource: https://www.jartic-open-traffic.org/\nRelated: https://github.com/atushi1841/kensho",
+  "author": {
+    "name": "atushi1841",
+    "url": "https://github.com/atushi1841"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atushi1841/jartic-japan-traffic-mcp"
+  },
+  "homepage": "https://github.com/atushi1841/jartic-japan-traffic-mcp",
+  "server": {
+    "type": "python",
+    "entry_point": "src/stdio_main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "src/stdio_main.py"
+      ]
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "linux", "win32"],
+    "runtimes": {"python": ">=3.10"}
+  },
+  "keywords": ["jartic", "traffic", "japan", "road", "transportation", "xroad", "mcp"],
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/atushi1841/jartic-japan-traffic-mcp/releases/download/v1.0.0/server.mcpb",
+      "version": "1.0.0",
+      "fileSha256": "edc4ffa83e93391fd0673cba4fe8df5f082e4794e41514ac1d8a2cc2c813e140",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "name": "get_traffic",
+      "description": "Query JARTIC traffic volume data for a bounding box",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "layer": {"type": "string", "description": "Layer: 5m_fixed, 1h_fixed, 5m_cctv, 1h_cctv"},
+          "lat_min": {"type": "number", "description": "South latitude", "default": 35.5},
+          "lon_min": {"type": "number", "description": "West longitude", "default": 139.5},
+          "lat_max": {"type": "number", "description": "North latitude", "default": 35.8},
+          "lon_max": {"type": "number", "description": "East longitude", "default": 140.0},
+          "hours_back": {"type": "integer", "description": "Hours back to query", "default": 24},
+          "limit": {"type": "integer", "description": "Max features", "default": 50}
+        },
+        "required": ["layer", "lat_min", "lon_min", "lat_max", "lon_max"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_traffic_station",
+      "description": "Query traffic data for a specific observation station",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "station_code": {"type": "integer", "description": "Station code (常時観測点コード)"},
+          "hours_back": {"type": "integer", "description": "Hours back", "default": 24},
+          "limit": {"type": "integer", "description": "Max records", "default": 100}
+        },
+        "required": ["station_code"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_layer_info",
+      "description": "Get information about available JARTIC traffic data layers",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      }
+    }
+  ]
+}

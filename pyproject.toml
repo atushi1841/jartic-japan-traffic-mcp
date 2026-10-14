@@ -1,0 +1,12 @@
+[project]
+name = "jartic-japan-traffic-mcp"
+version = "1.0.0"
+description = "MCP server for JARTIC Japan traffic volume data"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=3.0.0,<4.0.0",
+    "mcp>=1.25.0,<2.0.0",
+]
+
+[tool.uv]
+package = false
