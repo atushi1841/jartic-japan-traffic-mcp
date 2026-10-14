@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.atushi1841/jartic-japan-traffic-mcp",
+  "description": "MCP server for JARTIC traffic volume API - real-time traffic data from 2,600+ observation points across Japan's national highways",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/atushi1841/jartic-japan-traffic-mcp/releases/download/v1.0.0/server.mcpb",
+      "version": "1.0.0",
+      "fileSha256": "edc4ffa83e93391fd0673cba4fe8df5f082e4794e41514ac1d8a2cc2c813e140",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
