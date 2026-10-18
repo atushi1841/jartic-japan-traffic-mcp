@@ -129,3 +129,9 @@ station_data = await mcp.call_tool("get_traffic_station", {
 ## License
 
 MIT License — Kensho project (atushi1841)
+
+---
+## Data & Store
+
+- **Apify Store:** https://apify.com/fruitful_quintessence
+- **Gumroad datasets:** https://atushi5.gumroad.com/l/kutuxe
